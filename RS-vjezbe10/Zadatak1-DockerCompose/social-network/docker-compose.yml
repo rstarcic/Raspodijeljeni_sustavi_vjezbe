@@ -1,0 +1,25 @@
+
+services:
+  social-api:
+    image: social-api:1.0
+    ports:
+      - "3500:8000"
+    build: 
+      context: ./social-api
+    networks:
+      - interna_mreza
+
+
+  auth-api:
+    image: auth-api:1.0
+    ports:
+      - "9000:9000"
+    build: 
+      context: ./auth-api
+    networks:
+      - interna_mreza
+    restart: unless-stopped  # Ensures it restarts on failure
+
+networks:
+  interna_mreza:
+    driver: bridge
